@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forest Fire Prediction - Disaster Management</title>
+
+  <!-- Materialize CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style>
+    body {
+      background: url('{{ url_for('static', filename='images/background.jpg') }}') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .nav-wrapper {
+      padding: 0 20px;
+    }
+
+    nav {
+      height: 80px;
+      line-height: 80px;
+    }
+
+    .brand-logo {
+      font-size: 2rem;
+    }
+
+    .contact-button {
+      background-color: #ff5722;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .contact-button:hover {
+      background-color: #ff784e;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      display: none;
+    }
+
+    footer {
+      background-color: #eee;
+      padding: 10px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .input-field input {
+      color: black;
+    }
+
+    .input-field label {
+      color: black;
+    }
+
+    .footer-contact {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .btn-large {
+      background-color: #4CAF50 !important; /* Green Button */
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-large:hover {
+      background-color: #45a049 !important; /* Darker Green on Hover */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="light-blue lighten-1">
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo center"><b>Disaster Management</b></a>
+    </div>
+  </nav>
+  
+  <style>
+    .brand-logo.center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+  
+
+  <!-- Main Content -->
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+      <h1 class="header center white-text"><b>Forest Fire Prevention</b></h1>
+      <div class="row center">
+        <h5 class="header col s12 light"><b>Predict the probability of Forest-Fire Occurrence</b></h5>
+      </div>
+
+      <!-- Form -->
+      <div class="row">
+        <form action="/predict" method="post" class="col s12" onsubmit="return validateForm()">
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="Temperature"><b>Temperature</b></label>
+              <input placeholder="Temperature in Celsius" name="Temperature" id="Temperature" type="text" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="WindSpeed"><b>Wind Speed</b></label>
+              <input id="WindSpeed" name="WindSpeed" placeholder="Wind speed in km/h" type="text" class="validate" required>
+            </div>
+            <div class="input-field col s4">
+              <label for="Humidity"><b>Humidity</b></label>
+              <input id="Humidity" name="Humidity" placeholder="Humidity %" type="text" class="validate" required>
+            </div>
+          </div>
+          <div class="row center">
+            <button type="submit" class="btn-large waves-effect waves-light">Predict</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="result" class="center-align">
+        <h5><b>Prediction Result:</b></h5>
+        <p id="result-message"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <!-- Footer -->
+<footer style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #eee;">
+  <div style="text-align: center;">
+    <p><b>Done by:</b> Ujjal, Susmitha, Harshitha, lokiran</p>
+  </div>
+  <div class="footer-contact" style="display: flex; gap: 10px;">
+    <!-- Contact button -->
+    <a href="/contact" class="contact-button">
+      <i class="material-icons">phone</i>
+    </a>
+    
+    
+  </div>
+</footer>
+
+  
+  <style>
+    .contact-button {
+      background-color: #4CAF50; /* Green color */
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .contact-button {
+      background-color: #1a9c15; /* Green color */
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+  
+    .contact-button:hover {
+      background-color: #45a049; /* Darker green on hover */
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+  
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    function validateForm() {
+      var temperature = document.getElementById("Temperature").value;
+      var windspeed = document.getElementById("WindSpeed").value;
+      var humidity = document.getElementById("Humidity").value;
+      if (temperature === "" || windspeed === "" || humidity === "") {
+        alert("All fields must be filled out!");
+        return false;
+      }
+      return true;
+    }
+
+    // Display prediction result dynamically
+    {% if alert_message %}
+      document.getElementById("result-message").textContent = "{{ alert_message }}";
+      document.getElementById("result").style.display = "block";
+    {% endif %}
+  </script>
+
+</body>
+</html>

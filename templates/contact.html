@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+  <title>Disaster Management - Emergency Assistance & Forest Fire Prevention</title>
+
+  <!-- CSS Links -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <style>
+    body {
+      background-color: #f5f5f5;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      margin-top: 50px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-custom, .contact-page-button {
+      background-color: #ff5722;
+      color: white;
+    }
+
+    .btn-custom:hover, .contact-page-button:hover {
+      background-color: #ff784e;
+    }
+
+    .contact-page-button {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding: 10px 0;
+      text-align: center;
+      background-color: #eee;
+    }
+
+    .disaster-management-header {
+      background-color: #1e88e5;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .emergency-contact-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .emergency-contact-card h5 {
+      color: #ff5722;
+      margin-top: 10px;
+    }
+
+    .emergency-contact-button {
+      background-color: #ff5722;
+      color: white;
+      width: 150px;
+      padding: 12px;
+      border-radius: 5px;
+      text-align: center;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    .emergency-contact-button:hover {
+      background-color: #ff784e;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Disaster Management Header -->
+  <div class="disaster-management-header">
+    Disaster Management
+  </div>
+
+  <!-- Tabs for Navigation -->
+  <div class="container">
+    <ul class="tabs">
+      <li class="tab col s6"><a href="#emergency-assistance" class="active">Emergency Assistance</a></li>
+      <li class="tab col s6"><a href="#forest-fire-prevention">Forest Fire Prevention</a></li>
+    </ul>
+
+    <!-- Emergency Assistance Section -->
+    <div id="emergency-assistance" class="col s12">
+      <h4 class="center-align"><b><u>Emergency Contacts</u></b></h4>
+
+      <div class="emergency-contact-card">
+        <i class="material-icons large">local_fire_department</i>
+        <h5>Fire Department</h5>
+        <p><b>Hotline:</b> 101</p>
+        <a href="#modal1" class="btn waves-effect waves-light btn-custom emergency-contact-button modal-trigger">Emergency</a>
+      </div>
+
+      <div class="emergency-contact-card">
+        <i class="material-icons large">local_hospital</i>
+        <h5>Medical Emergency</h5>
+        <p><b>Hotline:</b> 102</p>
+        <a href="#modal1" class="btn waves-effect waves-light btn-custom emergency-contact-button modal-trigger">Emergency</a>
+      </div>
+
+      <div class="emergency-contact-card">
+        <i class="material-icons large">local_police</i>
+        <h5>Police</h5>
+        <p><b>Hotline:</b> 100</p>
+        <a href="#modal1" class="btn waves-effect waves-light btn-custom emergency-contact-button modal-trigger">Call Now</a>
+      </div>
+    </div>
+
+    <!-- Forest Fire Prevention Section -->
+    <div id="forest-fire-prevention" class="col s12">
+      <h4 class="center-align"><b><u>Forest Fire Prevention</u></b></h4>
+      <form id="contactForm" onsubmit="return validateContactForm()">
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="name" name="name" type="text" class="validate" required>
+            <label for="name">Enter your Name:</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="phone" name="phone" type="tel" class="validate" pattern="[0-9]{10}" required>
+            <label for="phone">Phone Number:</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="city" name="city" type="text" class="validate" required>
+            <label for="city">City:</label>
+          </div>
+          <div class="input-field col s12">
+            <input id="state" name="state" type="text" class="validate" required>
+            <label for="state">State:</label>
+          </div>
+          <div class="input-field col s12">
+            <select id="status" name="status" required>
+              <option value="" disabled selected>Choose your status:</option>
+              <option value="Safe">Forest is Safe</option>
+              <option value="Danger">Forest is in Danger</option>
+            </select>
+            <label for="status">Status</label>
+          </div>
+        </div>
+        <div class="row center">
+          <button type="submit" class="btn waves-effect waves-light btn-custom">Submit</button>
+        </div>
+      </form>
+      <div id="thankYouMessage" class="thank-you-message">
+        Thank you for submitting your information! Stay safe.
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Emergency Alert</h4>
+      <p>Thank you for contacting the emergency services. Help is on the way.</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close btn-custom btn waves-effect">Close</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; background-color: #eee;">
+    <div>
+      <p><b>Done by:</b> Ujjal, Susmitha, Harshitha, lokiran</p>
+    </div>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('select').formSelect();
+      $('.tabs').tabs();
+      $('.modal').modal();
+    });
+
+    function validateContactForm() {
+      var phone = document.getElementById("phone").value;
+
+      if (phone.length !== 10 || isNaN(phone)) {
+        alert("Please enter a valid 10-digit phone number.");
+        return false;
+      }
+
+      document.getElementById("contactForm").style.display = "none";
+      document.getElementById("thankYouMessage").style.display = "block";
+      return false;
+    }
+  </script>
+</body>
+
+</html>
